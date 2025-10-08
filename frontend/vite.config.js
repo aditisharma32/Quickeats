@@ -1,16 +1,17 @@
-// vite.config.js
+// frontend/vite.config.js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  // ⬅️ ADD THIS BLOCK ⬅️
   server: {
-    // Crucial step: binds the server to all network interfaces (0.0.0.0), 
-    // making it externally accessible within the Render container.
+    // 1. Keep the host fix from before:
     host: '0.0.0.0', 
-    // Optional: You can explicitly set the port as well, 
-    // though Render often manages the external port mapping.
-    port: 5173 
+    port: 5173,
+    // 2. ⬅️ ADD THIS NEW LINE ⬅️
+    allowedHosts: [
+      'quickeats-1-e7zz.onrender.com', // Your primary Render domain
+      '.onrender.com' // Optional: Allow all subdomains on Render for future deploys
+    ], 
   }
 });
